@@ -63,10 +63,20 @@ public class Tree {
 
     public void inOrder(NodeTree result) {
 
+
         if (result != null) {
+
+            //if node is an operator prints a paranthese before
+            if((result.data.equals("+") || result.data.equals("/") || result.data.equals("*")  || result.data.equals("-") )){
+
+                System.out.print("( ");
+            }
             inOrder(result.left);
             System.out.print(result.data + " ");
             inOrder(result.right);
+            if((result.data.equals("+") || result.data.equals("/") || result.data.equals("*")  || result.data.equals("-") )){
+                System.out.print(") ");
+            }
         }
     }
 
@@ -94,20 +104,7 @@ public class Tree {
 
     }
 
-    public void printExpressionHelper(NodeTree node) {
-        if (node == null) {
-            return;
-        }
 
-        System.out.print("( ");
-        printExpressionHelper(node.left);
-
-        // Why can we just put node here to print the item the node stores?
-        System.out.print(node.data + " ");
-
-        printExpressionHelper(node.right);
-        System.out.print(") ");
-    }
 
     public void inorder(NodeTree start) {
         if (!(start.left == null && start == null))
@@ -121,22 +118,39 @@ public class Tree {
             System.out.print(")");
     }
 
-    public void tryOrder(NodeTree p) {
-        if (p != null) {
-            if (p.left != null && p.right != null) {
-                System.out.print("(");
-            }
 
-            inorder(p.left);
-            System.out.print(p.data + " ");
-            inorder(p.right);
+    public double evalExpr (NodeTree node){
 
-            if (p.left != null && p.right != null) {
-                System.out.print(")");
+        NodeTree tmp;
+
+        double value = Double.parseDouble(node.data);
+
+        if(node != null) {
+
+            double value2 = Double.parseDouble(node.data);
+            return value2;
+
+
+        }
+        switch (node.data) {
+            case "+":
+                return evalExpr(node.left) +evalExpr(node.right);
+
+            case "-":
+                return evalExpr(node.left) + evalExpr(node.right);
+
+            case "*":
+                return evalExpr(node.left)  * evalExpr(node.right);
+
+            case "/":
+                return evalExpr(node.left) / evalExpr(node.right);
+
+            // etc for the other operators
             }
+            return value;
+
         }
 
-
     }
-}
+
 //we need to pop two pointers

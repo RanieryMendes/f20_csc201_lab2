@@ -131,20 +131,17 @@ public class Main {
         System.out.print("Printing expression in preOrder:  ");
         binaryTree.preOrder(expressionInTree.root);
         System.out.println(" ");
-        System.out.print("Printing expression in Order:  ");
-        binaryTree.inOrder(expressionInTree.root);
-        System.out.println(" ");
+
         System.out.print("Printing expression in PostOrder:  ");
         binaryTree.postOrder(expressionInTree.root);
+        System.out.println(" ");
 
-        System.out.println("");
-        binaryTree.printExpressionHelper(expressionInTree.root);
+        System.out.print("Printing expression in Order:  ");
+        binaryTree.inOrder(expressionInTree.root);
+        //System.out.println(binaryTree.evalExpr(expressionInTree.root));
 
-        System.out.println('\n');
-        binaryTree.inorder(expressionInTree.root);
 
-        System.out.println("\n");
-        binaryTree.tryOrder(expressionInTree.root);
+
 
 
 
