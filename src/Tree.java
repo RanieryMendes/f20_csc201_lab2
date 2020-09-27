@@ -1,13 +1,8 @@
-import org.w3c.dom.Node;
-
-import java.sql.SQLOutput;
-import java.util.Stack;
 
 public class Tree {
 
     NodeTree root;
 
-    static String str;
 
 
     Tree() {
@@ -90,67 +85,61 @@ public class Tree {
         }
     }
 
-    public double getResult(NodeTree result) {
-        if (result != null) {
 
-            inOrder(result.left);
-            System.out.print(result.data + " ");
-            inOrder(result.right);
 
+        //recursive function to transverse (postOrder) the tree and evaluate (sub)trees
+    public double eval(NodeTree result)
+
+    {
+
+        // empty tree
+
+        if (result == null)
+
+            return 0;
+
+
+        // if both left and right nodes are null ==> node stores a number
+
+        if (result.left == null && result.right == null)
+
+            //base case return the result of the expression
+            return Double.parseDouble(result.data);
+
+
+
+        // transverse and evaluate left subtree using recursive call
+        double l_val = eval(result.left);
+
+
+        // transverse and evaluate right subtree using recursive call
+
+        double r_val = eval(result.right);
+
+
+        // Verify the proper operator and carry out mathematical operation
+
+
+        if (result.data.equals("+"))
+
+            return l_val + r_val;
+
+
+        if (result.data.equals("-"))
+
+            return l_val - r_val;
+
+
+        if (result.data.equals("*"))
+
+            return l_val * r_val;
+
+        else {
+
+
+            return l_val / r_val;
         }
-
-        double exprResult = 0;
-        return exprResult;
+    }
 
     }
 
-
-
-    public void inorder(NodeTree start) {
-        if (!(start.left == null && start == null))
-            System.out.print("(");
-        if (start.left != null)
-            inorder(start.left);
-        System.out.print(start.data);
-        if (start.right != null)
-            inorder(start.right);
-        if (!(start.left == null && start.right == null))
-            System.out.print(")");
-    }
-
-
-    public double evalExpr (NodeTree node){
-
-        NodeTree tmp;
-
-        double value = Double.parseDouble(node.data);
-
-        if(node != null) {
-
-            double value2 = Double.parseDouble(node.data);
-            return value2;
-
-
-        }
-        switch (node.data) {
-            case "+":
-                return evalExpr(node.left) +evalExpr(node.right);
-
-            case "-":
-                return evalExpr(node.left) + evalExpr(node.right);
-
-            case "*":
-                return evalExpr(node.left)  * evalExpr(node.right);
-
-            case "/":
-                return evalExpr(node.left) / evalExpr(node.right);
-
-            // etc for the other operators
-            }
-            return value;
-
-        }
-
-    }
-
-//we need to pop two pointers
